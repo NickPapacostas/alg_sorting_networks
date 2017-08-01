@@ -23,8 +23,8 @@ defmodule SortingNetworkTest do
   end
 
   test "compare swap" do 
-    assert compare_swap([2,2,1,1], [{0,2}, {1, 3}]) == [1,1,2,2]
-    assert compare_swap([2,2,1,1], [{0,2}, {1, 3}]) == [1,1,2,2]
+    assert compare_swap([2,2,1,1], [[{0,2}], [{1, 3}]]) == [1,1,2,2]
+    assert compare_swap([2,2,1,1], [[{0,2}], [{1, 3}]]) == [1,1,2,2]
   end
 
   test "validity", context do 
@@ -36,11 +36,12 @@ defmodule SortingNetworkTest do
   end
 
   test "basic sorting network" do
-    input = for x <- 0..Enum.random(10..20), do: Enum.random(1..20)
-    comparators = build_sorting_network(input)
-    
-    # IO.puts inspect comparators
-    assert is_valid? comparators
-    assert main(comparators, input) == Enum.sort(input)
+    for z <- 0..10 do 
+      input = for x <- 0..Enum.random(10..100), do: Enum.random(1..50)
+      comparators = build_sorting_network(length(input))
+      
+      assert is_valid? comparators
+      assert main(comparators, input) == Enum.sort(input)
+    end
   end
 end

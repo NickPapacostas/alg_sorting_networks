@@ -50,15 +50,13 @@ defmodule SortingNetwork do
 
   def swap_if_greater(input, {ix1, ix2}) do
     [first, second] = Enum.sort([ix1, ix2])
-    
+
     if ( Enum.at(input, first) > Enum.at(input, second) ) do 
       r = input 
       |> List.replace_at(second, Enum.at(input, first))
       |> List.replace_at(first, Enum.at(input, second))
-      IO.puts "swappin #{inspect first} #{inspect(second)} result: #{inspect r}" 
       r
     else
-      IO.puts "NOt swappin "
       input
     end
   end
