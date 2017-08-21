@@ -36,8 +36,8 @@ defmodule SortingNetworkTest do
   end
 
   test "basic sorting network" do
-    for z <- 0..10 do 
-      input = for x <- 0..Enum.random(10..100), do: Enum.random(1..50)
+    for _z <- 0..10 do 
+      input = for _x <- 0..Enum.random(10..100), do: Enum.random(1..50)
       comparators = build_sorting_network(length(input))
       
       assert is_valid? comparators

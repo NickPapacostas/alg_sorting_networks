@@ -10,12 +10,28 @@ defmodule SortingNetwork do
   def build_sorting_network(input) when is_list(input), do: build_sorting_network(length(input))
   def build_sorting_network(1), do: []
   def build_sorting_network(2), do: [[{0,1}]]
-  def build_sorting_network(3), do: [[{0,1}], [{1,2}], [{1,0}]]
-  def build_sorting_network(l) when l > 3 do
+  def build_sorting_network(l) when l > 2 do
     new_comparators = for i <- l..1, do: [{i, i - 1}] 
     # IO.puts inspect(new_comparators ++ [build_sorting_network([])])
     build_sorting_network(l - 1) ++ new_comparators
   end
+
+  # def build_parallel_sort(input) when is_list(input), do: build_parallel_sort(length(input)) 
+  # def build_parallel_sort(input) when input < 2, do: build_sorting_network(input)
+  # def build_parallel_sort(input) when input > 2 do
+  #   previous = build_parallel_sort(input - 1)
+  #   {overlapping, _new_steps} = Enum.split_while(previous, fn(x) -> x < input - 2 end)
+  #   overlapping |> Enum.with_index |> Enum.map(fn({x, index}) -> x ++ [{index, index - 1}] end)
+  #   # build_parallel_sort(l - 1)
+  #   new_comparators = [{0}]
+  #   build_parallel_sort(l - 1) ++ new_comparators
+  # end
+
+  # defp build_comparators_for_length()
+  #   for i <- l..1, do: [{i, i - 1}] do
+  #     case Integer.is_even(i)
+    # IO.puts inspect(new_comparators ++ [build_sorting_network([])])
+
 
   def is_valid?(comparators), do: is_valid?(comparators, [true])
   def is_valid?(_comparators, [false | _results]), do: false
