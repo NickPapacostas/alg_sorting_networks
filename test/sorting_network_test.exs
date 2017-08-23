@@ -35,6 +35,10 @@ defmodule SortingNetworkTest do
     assert is_valid?(context[:invalid_comparators]) == false
   end
 
+  test "assignment examples" do 
+    assert test_assignment_examples() == [true, false, false, true]
+  end
+
   test "basic sorting network" do
     for _z <- 0..10 do 
       input = for _x <- 0..Enum.random(10..100), do: Enum.random(1..50)

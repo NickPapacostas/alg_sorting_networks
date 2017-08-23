@@ -1,3 +1,5 @@
+import(AssignmentExamples)
+
 defmodule SortingNetwork do
   def main(comparators, input) do
     if comparators |> is_valid? do
@@ -12,26 +14,8 @@ defmodule SortingNetwork do
   def build_sorting_network(2), do: [[{0,1}]]
   def build_sorting_network(l) when l > 2 do
     new_comparators = for i <- l..1, do: [{i, i - 1}] 
-    # IO.puts inspect(new_comparators ++ [build_sorting_network([])])
     build_sorting_network(l - 1) ++ new_comparators
   end
-
-  # def build_parallel_sort(input) when is_list(input), do: build_parallel_sort(length(input)) 
-  # def build_parallel_sort(input) when input < 2, do: build_sorting_network(input)
-  # def build_parallel_sort(input) when input > 2 do
-  #   previous = build_parallel_sort(input - 1)
-  #   {overlapping, _new_steps} = Enum.split_while(previous, fn(x) -> x < input - 2 end)
-  #   overlapping |> Enum.with_index |> Enum.map(fn({x, index}) -> x ++ [{index, index - 1}] end)
-  #   # build_parallel_sort(l - 1)
-  #   new_comparators = [{0}]
-  #   build_parallel_sort(l - 1) ++ new_comparators
-  # end
-
-  # defp build_comparators_for_length()
-  #   for i <- l..1, do: [{i, i - 1}] do
-  #     case Integer.is_even(i)
-    # IO.puts inspect(new_comparators ++ [build_sorting_network([])])
-
 
   def is_valid?(comparators), do: is_valid?(comparators, [true])
   def is_valid?(_comparators, [false | _results]), do: false
@@ -68,12 +52,25 @@ defmodule SortingNetwork do
     [first, second] = Enum.sort([ix1, ix2])
 
     if ( Enum.at(input, first) > Enum.at(input, second) ) do 
-      r = input 
+      input 
       |> List.replace_at(second, Enum.at(input, first))
       |> List.replace_at(first, Enum.at(input, second))
-      r
     else
       input
+    end
+  end
+
+  def is_sorting_network?(comparators) do
+    random_inputs(5, 100) |> Enum.all?(fn(x) -> main(comparators, x) == Enum.sort(x) end)
+  end
+
+  def test_assignment_examples do
+    for e <- AssignmentExamples.all, do: is_sorting_network?(e)
+  end
+  
+  defp random_inputs(len, num) do
+    for _x <- 0..num do 
+      for _y <- 0..len-1, do: Enum.random(0..40) 
     end
   end
 end
