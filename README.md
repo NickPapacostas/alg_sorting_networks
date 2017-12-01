@@ -11,9 +11,9 @@ Assuming Elixir is installed the tests can be run using mix `mix test`.
 
 To play around interactively with the app it can be run in an `iex` session using 
 
-`iex -S mix`
-`comparators = [[{0,1}], [{1, 2}]]`
-`SortingNetwork.main(comparators, [3, 2])`
+iex -S mix
+comparators = [[{0,1}], [{1, 2}]]
+SortingNetwork.main(comparators, [3, 2])
 
 
 ## ALG Assignment
